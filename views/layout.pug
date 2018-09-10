@@ -19,10 +19,13 @@ html
             if user
               li.nav-item
                 a.nav-link(href='/articles/add') Add articles
+              li.nav-item
+                a.nav-link(href='/athletes/add') Add athletes
           ul.navbar-nav.navbar-right
             if user
               li
-                a.nav-link(href='/users/logout') Logout
+                a.nav-link(href='/users/logout')
+                  div Hi #{user.username}, Logout
             else
               li
                 a.nav-link(href='/users/register') Register

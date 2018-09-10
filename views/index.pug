@@ -1,8 +1,16 @@
 extends layout
 
 block content
-    h1 #{title}
+    h1 Articles
     ul.list-group
     each article in articles
       li.list-group-item
         a(href="/articles/"+article._id)= article.title
+    br
+    hr
+    br
+    h1 Athletes
+    ul.list-group
+    each athlete in athletes
+      li.list-group-item
+        a(href="/athletes/"+athlete._id)= athlete.name

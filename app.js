@@ -9,6 +9,7 @@ const config = require('./config/database')
 
 // MongoDB
 const Article = require('./models/article')
+const Athlete = require('./models/athlete')
 
 mongoose.connect(config.database, { useNewUrlParser: true })
 var db = mongoose.connection
@@ -58,15 +59,19 @@ app.get('*', (req, res, next) => {
 
 app.get('/', (req, res) => {
   Article.find({}, (err, articles) => {
-    if (err) console.error(err)
-    else res.render('index', { title: 'Home', articles })
+    Athlete.find({}, (err, athletes) => {
+      if (err) console.error(err)
+      else res.render('index', { title: 'Home', articles, athletes })
+    })
   })
 })
 
 // Routes
-let articles = require('./routes/articles')
-let users = require('./routes/users')
+const articles = require('./routes/articles')
+const users = require('./routes/users')
+const athletes = require('./routes/athletes')
 app.use('/articles', articles)
 app.use('/users', users)
+app.use('/athletes', athletes)
 
 app.listen(3000, () => console.log('Your app is running on port 3000'))

@@ -54,7 +54,6 @@ router.post('/add', (req, res) => {
 
 router.post('/edit/:id', (req, res) => {
   req.checkBody('title', 'Title is required').notEmpty()
-  req.checkBody('author', 'Author is required').notEmpty()
   req.checkBody('body', 'Body is required').notEmpty()
 
   let errors = req.validationErrors()
@@ -68,7 +67,6 @@ router.post('/edit/:id', (req, res) => {
   else {
     let article = {}
     article.title = req.body.title
-    article.author = req.user._id
     article.body = req.body.body
 
     let query = { _id: req.params.id }
@@ -89,7 +87,7 @@ router.delete('/:id', (req, res) => {
     if (article.author != req.user._id) res.status(500).send()
     Article.remove(query, (err) => {
       if (err) return console.error(err)
-      req.flash('success', article.title + ' has been deleted')
+      req.flash('danger', article.title + ' has been deleted')
       res.send('Success')
     })
   })
