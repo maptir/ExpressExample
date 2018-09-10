@@ -12,7 +12,7 @@ const ensureAuthenticated = (req, res, next) => {
 }
 
 router.get('/add', ensureAuthenticated, (req, res) => {
-  res.render('add_athlete', { name: 'Add Athlete' })
+  res.render('add_athlete', { title: 'Add Athlete' })
 })
 
 router.get('/:id', (req, res) => {
@@ -29,7 +29,7 @@ router.get('/edit/:id', ensureAuthenticated, (req, res) => {
       req.flash('danger', 'Not Authorized')
       return res.redirect('/')
     }
-    res.render('edit_athlete', { name: 'Edit Athlete', athlete })
+    res.render('edit_athlete', { title: 'Edit Athlete', athlete })
   })
 })
 
@@ -39,7 +39,7 @@ router.post('/add', (req, res) => {
   req.checkBody('desc', 'Description is required').notEmpty()
 
   let errors = req.validationErrors()
-  if (errors) res.render('add_athlete', { name: 'Add Athlete', errors })
+  if (errors) res.render('add_athlete', { title: 'Add Athlete', errors })
   else {
     let athlete = new Athlete()
     athlete.author = req.user._id
