@@ -1,0 +1,10 @@
+extends layout
+
+block content
+  h1= athlete.name
+  h5 Trophy won: #{athlete.trophy}
+  p= athlete.desc
+  hr
+  if user && user.id === athlete.author
+    a.btn.btn-success.mr-3(href='/athletes/edit/' + athlete._id) EDIT
+    a.btn.btn-danger.delete-athlete(href='#', data-id=athlete._id) DELETE
